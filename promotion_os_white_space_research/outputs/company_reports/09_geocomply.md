@@ -91,7 +91,7 @@ Net: GeoComply produces **evidence-grade reconstructions of user/device/location
 
 ## 8. Enterprise readiness
 
-- **SSO/RBAC**: not publicly documented for the back office (unresolved; SOC 2 implies access controls internally). [GEOCOMPLY-22]
+- **SSO/RBAC**: not publicly documented for the back office (unresolved; SOC 2 implies access controls internally). [GEOCOMPLY-022]
 - **Multitenancy/multi-brand**: operates across operators' multiple brands/states (Caesars across every licensed market; FanDuel's full product line), but tenancy/brand hierarchy features are undocumented. [GEOCOMPLY-025]
 - **Environments**: staging/production credentials per third-party docs. [GEOCOMPLY-007]
 - **Security certifications**: SOC 2 (maintained, report under NDA via trust.geocomply.com); AES-256/IP-allowlisting/2FA claims on OneComply; ISO 27001 not mentioned. [GEOCOMPLY-022, -020]
