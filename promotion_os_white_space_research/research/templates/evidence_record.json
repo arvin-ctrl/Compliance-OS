@@ -1,0 +1,12 @@
+{
+  "claim_id": "COMPANY-001",
+  "company": "Example",
+  "capability_square": "C04",
+  "claim": "Example claim",
+  "source_url": "https://example.com",
+  "page_title": "Example",
+  "source_type": "official-doc",
+  "access_date": "YYYY-MM-DD",
+  "confidence": "HIGH",
+  "notes": ""
+}
