@@ -1,0 +1,31 @@
+vendor,rate_confirmation_ingestion,rate_rule_extraction,gps_eld_timestamps,appointment_ingestion,pod_bol_ingestion,detention,tonu,layover,lumper,demurrage,accessorial_detection,evidence_package,invoice_creation,claim_submission,collection_tracking,dispute_workflow,portal,tms_integration,eld_integration,email_sms_ingestion,accounting_integration,recovered_revenue_analytics,performance_pricing,customer_specific_rules,multi_carrier_shipper_support,total
+3PL claims desk (human),2,1,1,2,2,2,2,2,2,1,1,2,2,2,2,2,1,2,1,2,2,1,0,2,2,41
+McLeod PowerBroker,2,2,2,2,2,1,1,1,1,1,1,1,2,1,2,1,2,2,2,1,2,0,0,2,2,36
+Trimble,2,2,2,1,1,2,1,1,1,2,1,1,2,0,1,1,1,2,2,2,2,1,0,2,2,35
+McLeod LoadMaster,1,0,2,1,2,2,1,1,1,0,1,2,2,0,2,1,2,2,2,2,2,1,0,2,2,34
+FAP category (Cass/AFS/Trax/nVision),2,2,0,0,2,1,0,0,1,2,2,1,0,2,1,2,2,2,0,1,2,2,2,2,2,33
+Transporeon,1,0,2,2,2,1,0,0,0,1,0,1,2,2,1,2,2,2,2,1,2,0,0,2,2,30
+FourKites,1,2,2,2,2,1,0,0,0,2,1,1,0,0,0,1,2,2,2,2,1,1,0,2,2,29
+Loop,1,2,0,0,2,1,0,0,2,1,2,2,0,1,0,2,2,2,0,1,2,2,0,2,2,29
+Turvo,1,1,2,1,2,1,1,1,1,0,0,1,2,0,1,1,2,2,2,1,2,0,0,1,2,28
+Intelligent Audit,2,2,0,0,1,1,0,0,0,1,2,1,0,2,1,2,2,2,0,1,1,2,1,2,2,28
+Oracle OTM,2,1,0,1,2,1,0,1,1,1,1,0,2,1,1,1,2,2,0,0,2,1,0,2,2,27
+Denim / Truckstop (broker lens),2,1,0,0,2,1,1,1,1,0,1,1,2,0,2,1,2,2,0,1,2,0,1,1,2,27
+TriumphPay,2,2,0,0,2,1,0,0,1,0,0,1,1,1,2,2,2,2,0,1,1,1,0,2,2,26
+Descartes,1,0,2,2,2,1,0,0,0,1,1,1,2,0,1,1,2,2,2,1,1,0,0,1,2,26
+Infios (ex-MercuryGate),0,0,1,1,1,0,0,0,0,0,1,1,2,2,2,2,2,2,1,0,2,1,0,2,2,25
+project44,1,1,2,2,0,1,0,0,0,2,1,1,0,0,0,1,2,2,2,1,1,1,0,2,2,25
+Generic carrier TMS,1,0,1,1,1,1,1,1,1,0,1,1,2,0,1,0,1,2,1,1,2,1,0,1,1,23
+Blue Yonder TMS,2,1,0,1,1,1,0,0,0,0,2,0,1,0,0,1,1,2,0,0,2,1,0,2,2,20
+OTR Solutions,2,0,0,0,2,1,0,0,1,0,0,1,2,1,2,1,2,1,0,1,1,1,0,0,1,20
+myEZClaim (Infios),0,0,0,0,1,0,0,0,0,0,0,2,2,1,2,2,1,2,0,0,1,2,0,1,2,19
+Broker's Excel + AR clerk,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,0,0,1,1,19
+Drumkit,2,0,1,2,1,0,0,0,0,0,0,0,0,0,0,0,2,2,1,2,0,0,0,1,2,16
+Vooma,2,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,2,2,1,2,0,0,0,1,2,15
+Terminal49,0,0,0,1,1,0,0,0,0,2,1,1,0,0,0,0,2,2,0,1,0,0,0,1,2,14
+Motive,0,0,2,2,1,1,0,0,0,0,0,1,0,0,0,0,1,2,2,0,0,0,0,0,1,13
+Opendock,0,0,0,2,1,1,0,0,0,0,0,1,0,0,0,0,2,1,0,1,0,1,0,1,2,13
+Expedock,1,0,0,0,2,0,0,0,0,0,0,0,1,0,0,0,1,2,0,2,1,0,0,1,1,12
+Loadsure,1,0,0,0,1,0,0,0,0,0,0,1,0,1,0,1,2,2,0,0,0,0,0,1,2,12
+Samsara,0,0,2,1,1,1,0,0,0,0,0,1,0,0,0,0,1,2,2,0,0,0,0,0,0,11
+Container xChange,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,2,0,0,0,0,0,0,0,1,4
