@@ -69,7 +69,7 @@
   3. Bias-audit service page (Holistic AI "one-stop-shop"; no public pricing) — nycbiasaudit.com, undated. https://www.nycbiasaudit.com/
   4. Academic study (16 expert interviews): "LL 144 has not effectively established an auditing regime"; auditors faced data-access and legitimacy disputes — arXiv 2402.08101, 2024-02-12. https://arxiv.org/abs/2402.08101
   5. Colorado SB 26-189 signed 2026-05-14: eliminates duty of care, deployer risk programs, impact assessments; effective date to 2027-01-01; disclosure-only focus — Hunton, 2026-05-22. https://www.hunton.com/privacy-and-cybersecurity-law-blog/colorado-ai-act-amended-and-effective-date-delayed
-  6. Trade-press headline precisely described: "'Everyone Ignores' New York City's Workplace AI Law" — Law360, 2024-03-01 (paywalled). https://www.law360.com/employment-authority/articles/1808526
+  (Corroborating headline, not ledgered — no stable URL retrievable from this environment: Law360, 2024-03-01, "'Everyone Ignores' New York City's Workplace AI Law", surfaced via Google News listing.)
 - Scout's confidence: LOW as an opportunity — I'm filing it deliberately as evidence AGAINST the "bias-audit SaaS" thesis other scouts may surface: mandatory-on-paper, ignored-in-practice, and the biggest state regime just rolled back.
 
 ## S06-5: Hiring pipelines drowning in AI-generated applications and fake/deepfake candidates
