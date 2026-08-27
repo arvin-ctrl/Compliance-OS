@@ -29,3 +29,23 @@ notice date, notice deadline, or entitlement basis** to its change object.
 makes it the cheapest available leading indicator that a platform is entering commercial entitlement. If it
 appears, W-001 dies permanently. If it has not appeared by mid-2027, the structural-refusal read is
 confirmed and W-001 gets stronger.
+
+---
+
+## W-003 · Real-time voice price collapse — unmined
+**Status:** largest verified, dated price collapse found in Cycle 1 with **no buyer attached yet**
+**Killed on:** G2 (no observable demand attached before the scout's budget ran out) — *not* on merit
+
+**The collapse, dated:** Oct 2024 at $100/$200 per 1M audio tokens → Aug 2025 GA at $32/$64,
+≈**$0.05 per conversation-minute**. Verified with sources in `cycles/01/scouts/01-capability-overhang.md`.
+
+**Why it stays on the list:** every other capability probed in Cycle 1 (long context, computer use, cheap
+OCR, video understanding, handwriting) already had commercial entrants. This one has the sharpest dated
+collapse and the thinnest competition — the scout simply ran out of search budget before it could attach an
+observable buyer.
+
+**Revival condition:** a dedicated scout pass that finds someone *currently paying human rates* for
+conversation-minutes — appointment setting, intake, dispatch, screening, after-hours answering, survey
+work, language practice — with published per-minute pricing. If no such buyer can be named, kill permanently.
+
+**Action:** dedicated pass in Cycle 2.
