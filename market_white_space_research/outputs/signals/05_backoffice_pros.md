@@ -57,7 +57,7 @@ WebSearch died early (program-wide budget), so per the brief I pivoted to WebFet
   4. r/CodingandBilling (u/Hellomindstack thread, 2026-07-08) enumerating routine PA failure modes billers see: "authorization submitted to the wrong payer or portal, expired authorization dates" — https://www.reddit.com/r/CodingandBilling/comments/1ur3l6c/what_are_the_most_common_reasons_your_prior/
 - Scout's confidence: HIGH on pain and forcing function (regulator + largest physician association + hospital survey all independent); MEDIUM on solo-founder wedge — incumbents (Availity, EHRs, well-funded PA startups) are converging on the same deadline, so the unserved slice is small/specialty practices and DME.
 
-## S05-6: Payer credentialing & enrollment limbo (can't bill until the payer says yes)
+## S05-4: Payer credentialing & enrollment limbo (can't bill until the payer says yes)
 - Who hurts: New/growing practices (esp. mental-health and therapy solos), practice managers adding providers, medical groups recruiting physicians; the billing companies who sell credentialing as a service.
 - The pain: Enrolling a provider with each payer is a 90–120-day black box of CAQH maintenance, portal applications, and phone calls where the payer itself gives conflicting answers visit-to-visit ("our tax ID is in-network... the provider's NPI is in-network, but the tax ID is out-of-network"). Until it clears, the provider sees patients that can't be billed in-network — revenue is simply parked.
 - Frequency: Per provider × per payer (typ. 5–15 payers per provider); recredentialing every 2–3 years; CAQH re-attestation quarterly.
