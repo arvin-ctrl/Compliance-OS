@@ -134,6 +134,13 @@ figure for the core loss existed anywhere.* That should have been an intake fail
 Scouts do **breadth, not depth**. Each returns 6–10 candidates with T1/T2 evidence attached, or reports the
 surface is dry. A scout that returns three beautifully-researched candidates has failed.
 
+> **CYCLE 1 CONVERGENCE — read before scouting.** Three unrelated surfaces independently landed on the same
+> shape. The regulatory scout: the only viable plays are where *a regulator publishes the list of who must
+> comply*. The open-source scout: developers pay only where the buyer has *an externally-imposed reporting or
+> retention obligation*. The two-tabs scout: the durable cases are *compelled users* who must key data into
+> someone else's system. **Externally-imposed obligation produces buyers who do not need to be persuaded the
+> problem exists** — which is the one thing a cold-start operator cannot manufacture. Weight it accordingly.
+
 1. **Capability overhang** — what did models, APIs, or compute price collapses make possible in the last 18 months that nobody has productised? Look at what was demoed and never shipped.
 2. **Manual-labour arbitrage** — Upwork, Fiverr, Contra, agency price lists. A gig posted 200 times at $300 is a spec with revealed willingness-to-pay attached.
 3. **Rich incumbent, dead product** — real revenue, terrible reviews, no releases in 24 months, angry renewal threads. Revenue proves the market; the changelog proves the opening.
@@ -147,7 +154,14 @@ surface is dry. A scout that returns three beautifully-researched candidates has
 11. **Unbundling** — a suite module with its own standalone search demand and its own angry users.
 12. **The two-tabs problem** — people manually shuttling data between two systems, at volume, visibly, forever.
 
-Scouts may propose a thirteenth surface if they find one. Record it.
+13. **Compelled users** *(added Cycle 1 — the strongest surface found)* — populations **legally or
+    contractually required** to key data into a system that somebody *else* buys: certified payroll portals,
+    state subsidy portals, EVV aggregators, vendor compliance portals, court e-filing, regulator returns.
+    Refusal to integrate is **permanent by construction** (the sufferer is not the vendor's customer), the
+    receiving format is a **published file spec rather than an API** (so no access to revoke), and the
+    population is **enumerable from the mandate itself** (so Gate 1 becomes a data problem).
+
+Scouts may propose a fourteenth surface if they find one. Record it.
 
 ---
 
@@ -226,8 +240,12 @@ Learned the expensive way. Violating one requires an explicit written argument.
 14. **"Already arbitraged" does not mean "no margin."** Observed AI entrants price at **25–40% of the human
     price**, not at machine cost — keeping the overwhelming majority of the arbitrage. An existing AI
     competitor is evidence the market pays, not proof the opening is gone. *(Cycle 1.)*
-15. **Scale ceiling is a tiebreaker, not a filter.** Searching for billion-dollar markets is what produced nothing. Own a niche completely; the ceiling is assessed afterwards.
-16. **Every cycle ends in a decision.** "More research needed" is a failure state, not an output.
+15. **Ask whose customer the sufferer is.** Not "do both systems have an API?" but *"whose customer is the
+    person doing the typing?"* Where the person suffering is **not** the vendor's customer, the vendor's
+    refusal to fix it is permanent by construction — and that is a moat you did not have to build.
+    *(Cycle 1, two-tabs surface.)*
+16. **Scale ceiling is a tiebreaker, not a filter.** Searching for billion-dollar markets is what produced nothing. Own a niche completely; the ceiling is assessed afterwards.
+17. **Every cycle ends in a decision.** "More research needed" is a failure state, not an output.
 
 ---
 
@@ -250,6 +268,20 @@ Applied by the Triage Manager to survivors, and again by the Originator to final
 nothing we could start.
 
 ---
+
+## 9b. MECHANICAL TRIAGE TESTS
+
+Cheap, primary-source checks that resolve gates in seconds. Run these before any reasoning. Add to this list
+every cycle.
+
+| Test | Method | Resolves |
+|---|---|---|
+| **Zapier coverage** | `GET https://zapier.com/apps/<slug>/integrations` → **200** = supported, **404** = absent | Kills any two-tabs candidate Zapier already serves. Verified against controls. Killed 11 candidates in minutes in Cycle 1 |
+| **Atlassian demand join** | `marketplace.atlassian.com/rest/2/addons?text=<q>` for `totalInstalls`/`averageRating`/`reviewCount`, cross-joined with `jira.atlassian.com/rest/api/2/search?jql=...` for vote counts and official `Won't Fix` status | Gates 1, 2 and 5 from primary data in one pass |
+| **Changelog death check** | Last release date on the marketplace listing, changelog, or repo | Separates "expensive incumbent" from "stagnant incumbent" |
+| **Price opacity check** | Does the incumbent publish a price? | No published price = segment abandoned because it cannot absorb a sales call = our segment |
+| **Register pull** | Download the regulator's list of obligated entities | Converts Gate 1 from a marketing problem into a data problem |
+| **Vote provenance** | Read the *official* comment on any high-vote issue before valuing it | Cycle 1 found an 1,815-vote issue that was a protest artefact after the vendor reverted the change |
 
 ## 10. CADENCE — how this becomes a standing team, not a one-off
 
