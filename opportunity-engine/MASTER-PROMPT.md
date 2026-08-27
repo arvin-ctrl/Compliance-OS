@@ -219,8 +219,15 @@ Learned the expensive way. Violating one requires an explicit written argument.
 10. **Build to kill.** A prototype's job is to destroy the idea cheaply, not to impress.
 11. **Platform access can be revoked.** If a better-funded company lost it, we will too. Prefer upload, export, and open formats over any API we do not control.
 12. **Boring and paid beats novel and admired.**
-13. **Scale ceiling is a tiebreaker, not a filter.** Searching for billion-dollar markets is what produced nothing. Own a niche completely; the ceiling is assessed afterwards.
-14. **Every cycle ends in a decision.** "More research needed" is a failure state, not an output.
+13. **A surviving price gap usually means the buyer is purchasing a warranty, not an output.**
+    Where incumbents hold a large margin over machine cost, check what they are really selling — measured
+    accuracy, liability, a stamp, indemnity. A cold-start operator has no warranty to sell, so those gaps are
+    structurally closed to us however large they look. *(Cycle 1, price-dislocation surface.)*
+14. **"Already arbitraged" does not mean "no margin."** Observed AI entrants price at **25–40% of the human
+    price**, not at machine cost — keeping the overwhelming majority of the arbitrage. An existing AI
+    competitor is evidence the market pays, not proof the opening is gone. *(Cycle 1.)*
+15. **Scale ceiling is a tiebreaker, not a filter.** Searching for billion-dollar markets is what produced nothing. Own a niche completely; the ceiling is assessed afterwards.
+16. **Every cycle ends in a decision.** "More research needed" is a failure state, not an output.
 
 ---
 
