@@ -143,7 +143,11 @@ surface is dry. A scout that returns three beautifully-researched candidates has
 
 1. **Capability overhang** — what did models, APIs, or compute price collapses make possible in the last 18 months that nobody has productised? Look at what was demoed and never shipped.
 2. **Manual-labour arbitrage** — Upwork, Fiverr, Contra, agency price lists. A gig posted 200 times at $300 is a spec with revealed willingness-to-pay attached.
-3. **Rich incumbent, dead product** — real revenue, terrible reviews, no releases in 24 months, angry renewal threads. Revenue proves the market; the changelog proves the opening.
+3. **Rich incumbent, dead product** — ⚠️ *Cycle 1: do NOT re-scan platform marketplaces for this pattern.*
+   WordPress (600 plugins), Atlassian (613 apps), iOS/Mac (6,193 apps) and Shopify (25,412 slugs) were pulled
+   machine-readably and returned **zero** qualifying hits: the landlord forces updates or delists (Shopify
+   delists unsupported apps after 9 months; every stale Atlassian app is EOL Server or free). Hunt independent
+   vendor domains instead. — real revenue, terrible reviews, no releases in 24 months, angry renewal threads. Revenue proves the market; the changelog proves the opening.
 4. **Regulatory clock** — new rules with a compliance date in the next 6–24 months, where the obligation is documentary and the affected population is enumerable.
 5. **Newly public or newly cheap data** — datasets that just opened, got an API, or collapsed in price.
 6. **Spreadsheet exhaust** — high-volume manual workflows visibly run in Excel/Sheets, evidenced by templates, tutorials, and course sales.
@@ -288,6 +292,7 @@ every cycle.
 | **Changelog death check** | Last release date on the marketplace listing, changelog, or repo | Separates "expensive incumbent" from "stagnant incumbent" |
 | **Price opacity check** | Does the incumbent publish a price? | No published price = segment abandoned because it cannot absorb a sales call = our segment |
 | **Register pull** | Download the regulator's list of obligated entities | Converts Gate 1 from a marketing problem into a data problem |
+| **Refugee test** | Before gathering any evidence on a stagnant incumbent, check whether its users have a *healthy* alternative to flee to | Killed 5 of 7 in Cycle 1. A dead incumbent is not an opening if the refugees already have somewhere good to go. Cheapest kill on that surface — run it first |
 | **Community rules check** | Read the target community's published rules before counting it as a channel | Cycle 1 found hard vendor bans in r/selfstorage, r/Machinists, r/SCREENPRINTING, r/Wastewater, r/Locksmith and r/FFLs — and the "ask a question then reveal your product" motion publicly called out. A banned community is a Gate 1 failure, not a channel |
 | **Vote provenance** | Read the *official* comment on any high-vote issue before valuing it | Cycle 1 found an 1,815-vote issue that was a protest artefact after the vendor reverted the change |
 

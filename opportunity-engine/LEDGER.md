@@ -28,3 +28,13 @@ wrong, not the market.
 | G5 clock | 0 |
 
 *(Cycle 0 counts are retrospective, applied to the previous R&D program to seed the ledger.)*
+
+## Cycle 1 — surface-level dead ends (do not re-run)
+
+| Finding | Evidence | Consequence |
+|---|---|---|
+| **Platform marketplaces cannot host the "rich incumbent, dead product" pattern** | Pulled machine-readably: WordPress.org API (600 popular plugins + installs + last-updated) → 12 stale with ≥100k installs, **all free**. Atlassian REST (613 apps, top-grossing, with `totalInstalls` + version dates) → every stale one is **Server, EOL Feb 2024**, or free. iOS/Mac App Store API (6,193 apps across 115 B2B terms) → 165 stale with ≥300 ratings, nearly all consumer games. Shopify (25,412 slugs, sampled 6,000) → worst 30 still rate 4.2–5.0; **Shopify delists unsupported apps after 9 months** | The landlord forces updates or delists. Hunt **independent vendor domains** for this pattern. Do not re-scan marketplaces |
+| **"Hosted version?" GitHub issues are a weak instrument** | Eight phrasings searched by reaction count; top results are predominantly the **inverse** — SaaS users asking for self-hosted builds | Use multi-vendor hosting prices or a dated licence/abandonment shock instead |
+| **High tutorial view count is anti-correlated with opportunity** | Scheduling 618k views → Homebase free; inventory 2.1M views → thirty vendors; job costing 426k views → bundled at $49/mo | The exhaust is how vendors *found* the niche. Visible pain is served pain |
+| **Generic "niche CRM/inventory app" is saturated** | ~45 trade communities swept; 2–6 independent devs already inside nearly every profitable niche thread, tools shipped within 12 months | Only the **regulated document** shape survives (Standing Law 16) |
+| **E-invoicing intermediary position** | France (PDP) and UAE (ASP) gate it behind state accreditation; Germany, Poland, Spain, Belgium leave it open but the artifact is already free (DATEV, lexoffice, KSeF, AEAT) | Killed. Someone else will monetise this |
