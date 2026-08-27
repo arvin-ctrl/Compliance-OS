@@ -244,8 +244,15 @@ Learned the expensive way. Violating one requires an explicit written argument.
     person doing the typing?"* Where the person suffering is **not** the vendor's customer, the vendor's
     refusal to fix it is permanent by construction — and that is a moat you did not have to build.
     *(Cycle 1, two-tabs surface.)*
-16. **Scale ceiling is a tiebreaker, not a filter.** Searching for billion-dollar markets is what produced nothing. Own a niche completely; the ceiling is assessed afterwards.
-17. **Every cycle ends in a decision.** "More research needed" is a failure state, not an output.
+16. **Prefer research-heavy over code-heavy.** AI-assisted building has collapsed the cost of the generic
+    "CRM/inventory app for niche X" play, and Cycle 1 found 2–6 independent developers already inside nearly
+    every profitable trade community running exactly that motion. The shape that survives is the **regulated
+    document** — an artifact that must be produced in a *named format*, for a *named third party*, under a
+    *deadline*, *fragmented across jurisdictions*. That work is research-heavy rather than code-heavy, which
+    is where we hold an advantage over a hobbyist with a coding assistant and where a funded competitor will
+    not follow. *(Cycle 1, communities surface.)*
+17. **Scale ceiling is a tiebreaker, not a filter.** Searching for billion-dollar markets is what produced nothing. Own a niche completely; the ceiling is assessed afterwards.
+18. **Every cycle ends in a decision.** "More research needed" is a failure state, not an output.
 
 ---
 
@@ -281,6 +288,7 @@ every cycle.
 | **Changelog death check** | Last release date on the marketplace listing, changelog, or repo | Separates "expensive incumbent" from "stagnant incumbent" |
 | **Price opacity check** | Does the incumbent publish a price? | No published price = segment abandoned because it cannot absorb a sales call = our segment |
 | **Register pull** | Download the regulator's list of obligated entities | Converts Gate 1 from a marketing problem into a data problem |
+| **Community rules check** | Read the target community's published rules before counting it as a channel | Cycle 1 found hard vendor bans in r/selfstorage, r/Machinists, r/SCREENPRINTING, r/Wastewater, r/Locksmith and r/FFLs — and the "ask a question then reveal your product" motion publicly called out. A banned community is a Gate 1 failure, not a channel |
 | **Vote provenance** | Read the *official* comment on any high-vote issue before valuing it | Cycle 1 found an 1,815-vote issue that was a protest artefact after the vendor reverted the change |
 
 ## 10. CADENCE — how this becomes a standing team, not a one-off
