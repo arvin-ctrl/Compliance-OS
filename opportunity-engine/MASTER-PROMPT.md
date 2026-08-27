@@ -97,6 +97,8 @@ requires two-sided liquidity · requires hardware · requires a regulated entity
 owner has revoked access from a better-funded company.
 
 ### GATE 4 — SELF-VERIFIABLE IN 14 DAYS
+> *Cycle 1 note: this gate killed **zero** candidates — everything it would have caught was already dead on
+> G3. Keep it as a design discipline for the charter, but do not expect it to do triage work.*
 > Can **we**, alone, prove or kill the single riskiest assumption within 14 days?
 
 **Automatic fail:** the decisive test requires a stranger's cooperation, a records request, a regulator, 30
@@ -150,8 +152,11 @@ surface is dry. A scout that returns three beautifully-researched candidates has
    vendor domains instead. — real revenue, terrible reviews, no releases in 24 months, angry renewal threads. Revenue proves the market; the changelog proves the opening.
 4. **Regulatory clock** — new rules with a compliance date in the next 6–24 months, where the obligation is documentary and the affected population is enumerable.
 5. **Newly public or newly cheap data** — datasets that just opened, got an API, or collapsed in price.
-6. **Spreadsheet exhaust** — high-volume manual workflows visibly run in Excel/Sheets, evidenced by templates, tutorials, and course sales.
-7. **Open source with commercial pull** — projects whose issue trackers beg for a hosted, managed, or supported version. Distribution comes free with the repo.
+6. **Spreadsheet exhaust** — ⚠️ *Cycle 1: this surface selects **against** Gate 5. Spreadsheet pain is chronic,
+   not event-driven, so G5 killed six of eight. Either exempt this surface from the clock requirement or drop
+   it.* — high-volume manual workflows visibly run in Excel/Sheets, evidenced by templates, tutorials, and course sales.
+7. **Open source with commercial pull** — ⚠️ *Cycle 1: five of its candidates died on G3 "24/7 on-call".
+   Scout only async/batch artifacts here; managed hosting of anything critical-path is out of profile.* — projects whose issue trackers beg for a hosted, managed, or supported version. Distribution comes free with the repo.
 8. **Platform ecosystem gaps** — Shopify, Chrome, Figma, Slack, Notion, VS Code, Obsidian, WordPress. **Install counts are public demand data**, and the marketplace *is* the cold-start channel.
 9. **Price dislocation** — anything costing $500 by hand that costs $0.50 by machine, where the buyer is the payer.
 10. **Communities with money and no tools** — profitable niches whose practitioners gather publicly and use nothing purpose-built.
@@ -241,6 +246,13 @@ Learned the expensive way. Violating one requires an explicit written argument.
     Where incumbents hold a large margin over machine cost, check what they are really selling — measured
     accuracy, liability, a stamp, indemnity. A cold-start operator has no warranty to sell, so those gaps are
     structurally closed to us however large they look. *(Cycle 1, price-dislocation surface.)*
+13a. **Selling to the warranty-*issuer* escapes Law 13 — but moves the ceiling onto their wage.** If the
+    buyer is the person who personally carries the liability (a freelance remediator, a sole practitioner),
+    the warranty never becomes ours and Law 13 is *bounded* rather than violated. But the price ceiling is
+    then **(automatable fraction) × (their hourly rate)**, not the incumbent's rate card. Cycle 1: an apparent
+    "3,000–10,000× gap" against a $7.50/page vendor price collapsed to **$5–10/hr** once measured against the
+    $15–20/hr person we would actually be selling to. **Always measure the gap against the buyer's own cost,
+    never the incumbent's price.**
 14. **"Already arbitraged" does not mean "no margin."** Observed AI entrants price at **25–40% of the human
     price**, not at machine cost — keeping the overwhelming majority of the arbitrage. An existing AI
     competitor is evidence the market pays, not proof the opening is gone. *(Cycle 1.)*
