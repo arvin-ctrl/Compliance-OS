@@ -43,3 +43,14 @@ business if the freelancer bills by the page — that is exactly what the 14-day
 **Before advancing:** scout 11's Reddit citations are URL + date + search-engine snippet — it did **not**
 read the thread bodies, because Reddit is unfetchable from this environment. **Its quotes must be re-read
 live.** This program died once on an unverified number.
+
+---
+
+## TOOLING FINDINGS — carry into every future cycle
+
+| Environment fact | Consequence |
+|---|---|
+| **Fiverr is fully readable via the `r.jina.ai` text proxy** (direct curl 403s) — returns gig titles, review counts, prices, full package tables with delivery times, and *dated* reviews with buyer price bands | The single most useful access discovery of Cycle 1. Use it first on any marketplace surface |
+| **Unreachable from this environment:** Reddit (403 JSON, HTML shell), Upwork, Etsy, eBay, Stack Overflow, Practical Machinist, CodeCanyon (Cloudflare), Fannie/Freddie, federalregister.gov, Amazon Seller Forums | Any Gate 1 resting on these is **unproven, not passed**. CodeCanyon is the biggest single miss — it publishes per-item **sales counts** beside last-update dates |
+| **`old.reddit.com` HTML is scrapeable** where the JSON API is not — quotes and URLs survive, but **subscriber counts do not** | Use comment counts and thread frequency as a size proxy, and say so |
+| **WebSearch budget is 200 calls, shared across the whole scout fleet** | Cycle 1 exhausted it roughly two-thirds through. **Cycle 2 must budget searches per scout explicitly**, or stagger scouts so late surfaces are not starved |
