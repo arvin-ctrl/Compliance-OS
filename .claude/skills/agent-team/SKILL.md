@@ -55,6 +55,26 @@ them, filling every placeholder. The templates encode hard-won rules (critics mu
 the rubric, revisers must decline-with-argument rather than ignore, judges score before
 comparing) that casual re-phrasings tend to lose.
 
+**Run directory layout** (the templates' paths depend on this — follow it exactly). A
+*cycle*'s critiques sit beside the drafts they review; its revisions, integrated version, and
+verdict land in the next round directory. So a 1-cycle run ends in `round-2/`:
+
+```
+brief.md                      Phase 0
+round-1/draft-*.md            cycle 1: independent first drafts
+round-1/critique-*.md         cycle 1: critiques of those drafts
+round-1/redteam.md            cycle 1: red team on the whole set
+round-2/draft-*.md            cycle 1: revised sections
+round-2/version.md            cycle 1: integrated Version 1
+round-2/verdict.md            cycle 1: judge → SHIP or ITERATE
+round-2/critique-*.md ...     cycle 2 (if ITERATE): critics review the round-2 drafts,
+round-3/draft-*.md ...        revisers apply critiques + the round-2 verdict's directives,
+round-3/version.md, verdict.md   and the judge closes cycle 2 in round-3/
+```
+
+Fresh drafters exist only in cycle 1; from cycle 2 on, Phase 1's work is done by revisers
+following the previous verdict's directives.
+
 ## Phase 0 — Frame (you, in the main conversation)
 
 Do not spawn anything yet. First create a run directory
@@ -74,9 +94,9 @@ Do not spawn anything yet. First create a run directory
 4. **Section split** — 2-6 sections with owner-shaped boundaries (by page, module, chapter,
    workstream). Good splits minimize overlap; every section names what is explicitly OUT of its
    scope. For code, split so sections touch disjoint files wherever possible.
-5. **Loop budget** — default 2 rounds; 3 for large or user-emphasized-quality work; 1 round
-   (draft → critique → revise → judge, no second loop) for small work. Also set the bar: judge
-   verdict SHIP requires every criterion ≥ 8/10 by default.
+5. **Loop budget** — default 2 cycles; 3 for large or user-emphasized-quality work; 1 cycle
+   (draft → critique → revise → integrate → judge, no second loop) for small work. Also set
+   the bar: judge verdict SHIP requires every criterion ≥ 8/10 by default.
 
 If facts are missing (market data, API docs, competitor examples), spawn 1-3 researcher agents
 in parallel now (template in roles.md) and have drafters read their digests.
@@ -98,9 +118,9 @@ own conform to them, which destroys the diversity the loop feeds on.
 ## Phase 2 — Critique (parallel, fresh eyes)
 
 When all drafts land, spawn critics — **fresh agents, never the drafter re-reading its own
-work in the same conversation**. Assignment rule: each critic reviews a section it did not
-write (rotate assignments; tell each critic which section it "drafted" so it has team context
-without attachment). Every critique must anchor each complaint to a rubric criterion, the
+work in the same conversation**. Assignment rule: no critic reviews a section it had any hand
+in writing; critics get team context by skimming the sibling drafts, not by role-playing
+authorship. Every critique must anchor each complaint to a rubric criterion, the
 brief, or a demonstrated error — critics who can verify cheaply (run the code, check the
 number) must do so. Critiques also list *steal-worthy ideas from sibling sections*: critique
 is not only fault-finding, it's the cross-pollination mechanism.
@@ -161,11 +181,17 @@ the loop. Keep the run directory intact; it's the audit trail.
 
 ## Scaling the team
 
-| Project size | Sections | Critics | Red team | Rounds | Example |
+| Project size | Sections | Critics | Red team | Cycles | Example |
 |---|---|---|---|---|---|
-| Small (single doc/page/module) | 2-3 | shared (1 critic, 2 sections; never own) | fold into critics | 1 | one landing page, a policy doc |
+| Small (single doc/page/module) | 2-3 | 1 shared | same sitting | 1 | one landing page, a policy doc |
 | Medium (default) | 3-4 | 1 per section | 1 | 2 | multi-page site, feature with tests, full plan |
-| Large / "best possible" | 4-6 | 1 per section | 1 per round | 3 | product build, compliance program, book-length doc |
+| Large / "best possible" | 4-6 | 1 per section | 1 per cycle | 3 | product build, compliance program, book-length doc |
+
+**Small configuration, operationally:** one critic sitting reviews every section — one
+critique file per section using the Critic template — and then also writes `redteam.md`
+using the Red-team template, in the same sitting. File names and reviser read-lists stay
+identical to the larger configurations; only the number of agents shrinks. The "never your
+own work" rule still binds whoever plays the critic.
 
 Under-scaling wastes the setup; over-scaling wastes tokens on coordination. More agents help
 breadth (more sections, more angles); more rounds help depth (harder integration, subtler
@@ -176,7 +202,9 @@ fixes). Past 3 rounds, spend the tokens on a better rubric instead.
 **Default — Agent tool.** Orchestrate from the main conversation: each phase's agents go out
 as parallel Agent calls in one message; you sequence the phases as results land. All artifacts
 live in the run directory; agents read/write files and return short summaries, so your context
-stays small no matter how big the project is. This works in any Claude Code session.
+stays small no matter how big the project is. Check the Agent tool actually exists in your
+current toolset before promising this mode — nested subagents and some environments don't
+have it, and the fallback below is the plan for them, not an apology.
 
 **Heavy mode — Workflow tool.** For large configurations, run the loop as a deterministic
 script: see [references/workflow-script.md](references/workflow-script.md) for a ready
@@ -184,10 +212,16 @@ launch-and-adapt template (the user's invocation of this skill is the opt-in tha
 Workflow). Prefer it when rounds ≥ 2 and sections ≥ 4, or when the user wants to watch
 progress phase-by-phase.
 
-**No-subagent fallback.** In environments without the Agent tool, run the same loop in-thread:
-write each artifact to its file, then *start each role by re-reading only that role's inputs
-from disk* — the file boundary is what preserves fresh eyes when you can't have fresh
-contexts. Do the phases in the same order; never critique from memory of writing the draft.
+**No-subagent fallback.** In environments without the Agent tool, run the same loop in-thread
+as sequential "sittings", one role at a time. The file boundary substitutes for the context
+boundary: every artifact goes to its file, and before the two roles where fresh eyes are
+load-bearing — critic and judge — re-read the artifact under review from disk and work only
+from what the file says, never from your memory of writing it. (Inputs you just wrote and
+that are verbatim in context don't need ceremonial re-reads for the other roles.) Be honest
+about the fallback's one real limit: in-thread, later drafters inevitably have earlier drafts
+in context, so draft ALL sections before critiquing any, and lean harder on rubric anchoring
+to compensate for the lost independence. "Return only:" lines in the templates apply to
+spawned agents; in-thread, just move to the next sitting.
 
 **Code-project specifics.** The governing principle is *parallelize reads, serialize writes*:
 research, review, and critique fan out freely, but implementation is partitioned by strict

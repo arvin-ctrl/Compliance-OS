@@ -11,6 +11,10 @@ the rubric and section decomposition into the run directory, then launch the wor
 section list as `args`. After the workflow returns, you still do Phase 6 (deliver) yourself.
 
 Notes that keep the script working:
+- The script's directory layout is intentionally SIMPLER than the roles.md fallback layout:
+  here each `round-N/` is self-contained (drafts, critiques, redteam, version, verdict all in
+  one dir), because revision happens inside the next round's draft stage. Both layouts are
+  fine — every prompt embeds its full paths — just don't mix conventions inside one run.
 - Scripts are plain JavaScript, no TypeScript syntax.
 - `Date.now()` / `new Date()` / `Math.random()` are unavailable inside scripts — the run
   directory path is created BEFORE launching and passed in via `args`.
@@ -80,33 +84,36 @@ const draftP = (s, r) =>
     `. End with "## Decisions I made" and "## Ideas for other sections" (max 3, 1-2 sentences each).`) +
   ` Write the draft to ${runDir}/round-${r}/draft-${s.slug}.md. Return only a 3-bullet summary.`
 
-const critiqueP = (s, r, reviewerOf) =>
-  `You are a fresh-context CRITIC. You did not write this. Read ${runDir}/brief.md, then review ` +
-  `${runDir}/round-${r}/draft-${s.slug}.md against the rubric; skim sibling drafts in ${runDir}/round-${r}/ ` +
-  `for fit and steal-worthy ideas. Structure: "## Verdict in one line", "## What genuinely works", ` +
-  `"## Rubric failures" (each anchored to a criterion + quoted evidence — no vibes; verify claims ` +
-  `cheaply where possible, e.g. run code), "## Steal-worthy ideas from sibling sections", ` +
-  `"## Concrete fixes" (numbered, most important first, each actionable). Do not rewrite it; do not ` +
-  `invent requirements; if it is strong, say so briefly. You are reviewing ${s.name} on behalf of the ` +
-  `team; you also drafted "${reviewerOf}" so you know the project. ` +
+const critiqueP = (s, r) =>
+  `You are a fresh-context CRITIC. You did not write any of this — that's deliberate. Read ` +
+  `${runDir}/brief.md, then review ${runDir}/round-${r}/draft-${s.slug}.md against the rubric; ` +
+  `skim sibling drafts in ${runDir}/round-${r}/ for fit and steal-worthy ideas. Structure: ` +
+  `"## Verdict in one line", "## What genuinely works" (specific — the reviser treats it as a ` +
+  `do-not-cut list), "## Rubric failures" (each anchored to a criterion + quoted evidence — no ` +
+  `vibes; verify claims cheaply where possible, e.g. run code), "## Steal-worthy ideas from ` +
+  `sibling sections", "## Concrete fixes" (numbered, most important first, each actionable). ` +
+  `Do not rewrite it; do not invent requirements; if it is strong, say so briefly — this is your ` +
+  `one pass, and manufacturing complaints is worse than a short critique. ` +
   `Write to ${runDir}/round-${r}/critique-${s.slug}.md. Return the one-line verdict + failure count.`
 
 const redteamP = (r) =>
   `You are the RED TEAM. Read ${runDir}/brief.md then every draft in ${runDir}/round-${r}/. Attack: ` +
   `(1) goal substitution — where did the team solve an easier problem than the brief's? (2) audience ` +
   `walk-through on their worst day; (3) correctness — verify claims/code/numbers, run what you can; ` +
-  `(4) required gaps; (5) safety/compliance exposure. Report the 5-10 most damaging findings, numbered, ` +
-  `each with evidence and the smallest defusing change. Write to ${runDir}/round-${r}/redteam.md. ` +
-  `Return your top 3 findings as one-liners.`
+  `(4) required gaps; (5) safety/compliance exposure. Report up to 10 findings, numbered, most ` +
+  `damaging first — fewer rather than manufactured, each with evidence and the smallest defusing ` +
+  `change. Write to ${runDir}/round-${r}/redteam.md. Return your top 3 findings as one-liners.`
 
 const integrateP = (r) =>
   `You are the INTEGRATOR. Read ${runDir}/brief.md and every draft in ${runDir}/round-${r}/. Merge ` +
   `into one coherent version: assemble per the brief's structure, unify voice/terminology/format, ` +
-  `kill duplication, resolve cross-section contradictions per the brief, make transitions and ` +
-  `interfaces real (code must actually build/import correctly). One strong voice, not an average of ` +
-  `voices. Write the assembled version to ${runDir}/round-${r}/version.md (or the real deliverable ` +
-  `paths the brief names, then list them in version.md). Return integration changes + unresolved ` +
-  `conflicts for the judge.`
+  `kill duplication, resolve cross-section contradictions per the brief, strip the working blocks ` +
+  `("## Decisions I made", "## Ideas for other sections", "## Fixes declined" stay in the draft ` +
+  `files, not the deliverable), make transitions and interfaces real (code must actually ` +
+  `build/import correctly). One strong voice, not an average of voices. Write the assembled ` +
+  `version to ${runDir}/round-${r}/version.md; when the deliverable's real format isn't markdown, ` +
+  `put the real files where the brief names and make version.md the manifest (what lives where + ` +
+  `build/test status). Return integration changes + unresolved conflicts for the judge.`
 
 const judgeP = (r) =>
   `You are the JUDGE, fresh context, no stake in the work. Read ${runDir}/brief.md — the rubric is ` +
@@ -116,7 +123,8 @@ const judgeP = (r) =>
     `regression explicitly.` : '') +
   ` Verdict SHIP if every criterion >= ${bar} and no regression, else ITERATE with 3-5 numbered ` +
   `directives (each names a section + the rubric criterion it serves; no new scope; do not relitigate ` +
-  `settled calls). Write the full report to ${runDir}/round-${r}/verdict.md. Return the structured verdict.`
+  `settled calls). On SHIP, end the report with "## Flags at ship" — non-blocking observations for ` +
+  `delivery, or "none". Write the full report to ${runDir}/round-${r}/verdict.md. Return the structured verdict.`
 
 let verdict = null
 let round = 0
@@ -130,12 +138,10 @@ while (round < maxRounds) {
     agent(draftP(s, round), { label: `draft:${s.slug}`, phase: ph })))).filter(Boolean)
   if (!drafts.length) throw new Error('all drafters failed')
 
-  // Cross-assign critics: the drafter of section i critiques section i+1 (never its own),
-  // via a fresh agent that is TOLD which section it drafted (context, without attachment).
+  // Critics are all fresh spawns (they drafted nothing), one per section, plus the red team.
   await parallel([
-    ...sections.map((s, i) => () =>
-      agent(critiqueP(s, round, sections[(i + 1) % sections.length].name),
-        { label: `critique:${s.slug}`, phase: ph })),
+    ...sections.map(s => () =>
+      agent(critiqueP(s, round), { label: `critique:${s.slug}`, phase: ph })),
     () => agent(redteamP(round), { label: 'red-team', phase: ph }),
   ])
 

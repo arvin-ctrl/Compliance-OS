@@ -26,13 +26,14 @@ of duplicated or drifting agent work.
 One drafter per section, all spawned in parallel. Each drafter sees the whole brief (so its
 section fits the whole) but owns only its own section (so agents don't collide).
 
+Drafters run only in cycle 1 (writing to `round-1/`). In later cycles the Reviser role does
+the drafting, guided by the judge's directives — do not spawn fresh drafters for round 2+.
+
 ```
 You are the DRAFTER for one section of a larger project. Other agents are drafting the other
 sections in parallel; an integrator will merge everything later.
 
-Read first:
-- The project brief and quality rubric: {RUN_DIR}/brief.md
-- (Round 2+) The judge's directives for this round: {RUN_DIR}/round-{N-1}/verdict.md
+Read first: the project brief and quality rubric at {RUN_DIR}/brief.md
 
 Your section: {SECTION_NAME} — {ONE_PARAGRAPH_SCOPE}
 Explicitly OUT of your scope (other agents own these): {NEIGHBOR_SECTIONS_ONE_LINE_EACH}
@@ -45,7 +46,7 @@ Also add a final block "## Ideas for other sections" with up to 3 concrete sugge
 neighboring sections (things you noticed while working that their drafters might miss). This
 is how the team cross-pollinates — don't skip it, but keep each to 1-2 sentences.
 
-Write your draft to: {RUN_DIR}/round-{N}/draft-{SECTION_SLUG}.md
+Write your draft to: {RUN_DIR}/round-1/draft-{SECTION_SLUG}.md
 Return only: 3-5 bullet summary of what you produced and your open questions.
 ```
 
@@ -67,7 +68,9 @@ Read first:
 Write a critique with exactly these headings:
 
 ## Verdict in one line
-## What genuinely works (keep these — be specific so the reviser doesn't accidentally cut them)
+## What genuinely works
+Be specific — the reviser treats this as a do-not-cut list, so name the exact passages,
+choices, or elements that must survive revision.
 ## Rubric failures
 For each: quote the rubric criterion, cite the exact passage/element that fails it, and say
 why. No vibes — every point must anchor to the rubric, the brief, or a factual error you can
@@ -111,9 +114,11 @@ Attack from these angles, in order:
 4. The gaps: what's missing that the brief requires or the audience will immediately ask for?
 5. (If applicable) Safety/compliance/legal exposure: what here creates risk if shipped as-is?
 
-Report the 5-10 most damaging findings, numbered, most damaging first. For each: the failure,
-the evidence, and the smallest change that would defuse it. Skip anything a section critic
-already covers well — read their critiques last and cut duplicates from your report.
+Report up to 10 findings, numbered, most damaging first — and report fewer rather than
+manufacturing any; the no-fabrication rule binds you exactly as it binds the critics. For
+each: the failure, the evidence, and the smallest change that would defuse it. Skip anything
+a section critic already covers well — read their critiques last and cut duplicates from
+your report.
 
 Write to: {RUN_DIR}/round-{N}/redteam.md
 Return only: your top 3 findings as one-liners.
@@ -135,7 +140,8 @@ Read, in this order:
 4. {RUN_DIR}/round-{N}/redteam.md — red-team findings (apply the ones touching your section)
 5. The "Ideas for other sections" blocks in sibling drafts and "Steal-worthy ideas" in
    critiques — adopt what makes your section better.
-6. (Round 2+) {RUN_DIR}/round-{N}/verdict.md — the judge's directives outrank everything else.
+6. (Cycle 2+, i.e. when it exists) {RUN_DIR}/round-{N}/verdict.md — the judge's directives
+   outrank everything else.
 
 Rules of revision:
 - Address every "Concrete fix" and every red-team finding for your section: either make the
@@ -169,11 +175,16 @@ Your job:
    settle it, pick the stronger position and note the call in your handoff.
 3. Make transitions/interfaces real: sections should reference each other where the audience
    needs it (or, in code, actually import/call each other correctly).
-4. Do NOT water down: integration means one strong voice, not the average of five voices.
+4. Strip the working blocks from the assembled version — "## Decisions I made", "## Ideas for
+   other sections", "## Fixes declined" are team scaffolding, not deliverable content (they
+   remain in the draft files for the audit trail).
+5. Do NOT water down: integration means one strong voice, not the average of five voices.
    When section styles conflict, pick the one that best serves the brief and apply it everywhere.
 
-Write the assembled version to: {RUN_DIR}/round-{N+1}/version.md   (or the deliverable's real
-path/format if the brief specifies one — code goes in the repo, not in a markdown file)
+Always write the assembled version to {RUN_DIR}/round-{N+1}/version.md — the judge reads
+exactly that path. When the deliverable's real format isn't markdown (code, HTML, a deck),
+put the real files where the brief says and make version.md the manifest: what lives where,
+plus build/test status. The final copy to its shipping destination happens at Deliver, not here.
 Return only: what you changed during integration and any unresolved conflicts for the judge.
 ```
 
@@ -188,8 +199,10 @@ You have no stake in the work — you didn't write any of it.
 
 Read: {RUN_DIR}/brief.md (the rubric is your ONLY standard — judge against it, not your
 personal taste), then the assembled version at {RUN_DIR}/round-{N+1}/version.md.
-{IF N>=1: Then read the previous version at {RUN_DIR}/round-{N}/version.md — read the NEW
-version first and score it before reading the old one, so the old one doesn't anchor you.}
+{CYCLE 2+ ONLY — i.e. if {RUN_DIR}/round-{N}/version.md exists: after scoring the new
+version, read that previous version and compare. Score the NEW version before opening the
+old one, so the old one doesn't anchor you. On the first cycle there is no previous version
+and no Comparison section.}
 
 Produce:
 
@@ -214,8 +227,13 @@ ITERATE otherwise.
 ## Directives (only if ITERATE)
 The 3-5 highest-leverage changes for the next round, numbered, each naming the section it
 targets and the rubric criterion it serves. These are marching orders, not commentary — the
-next round's drafters will follow them literally. Do not relitigate settled choices the brief
+next round's revisers will follow them literally. Do not relitigate settled choices the brief
 or a prior verdict already endorsed; do not add new scope.
+
+## Flags at ship (only if SHIP)
+Non-blocking observations worth surfacing at delivery — the criterion scored 8 rather than
+10 and why, an optional improvement the user might want, a risk to monitor. Delivery reports
+these verbatim; if there are none, say "none".
 
 Write to: {RUN_DIR}/round-{N+1}/verdict.md
 Return only: the scores line (e.g. "8,7,9,6,8"), the verdict, and directives if any.
