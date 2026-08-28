@@ -81,7 +81,10 @@ change and to what — "make it better" is not a fix.
 
 Hard rules: do not rewrite the section yourself; do not invent new requirements beyond the
 brief (flag a "consider adding X" separately as a suggestion, clearly marked optional); if the
-section is genuinely strong, say so briefly and don't manufacture complaints to look thorough.
+section is genuinely strong, say so briefly and don't manufacture complaints to look thorough
+(a reviewer who must find something starts finding things that aren't there). This is your
+one pass: be thorough now — there is no follow-up dialogue, and critiquing anything other
+than the artifact itself (process, style of prior critiques, the team) is off-limits.
 
 Write your critique to: {RUN_DIR}/round-{N}/critique-{SECTION_SLUG}.md
 Return only: your one-line verdict and the count of rubric failures found.
@@ -198,7 +201,10 @@ effort or improvement.
 
 ## Comparison (round 2+)
 Better / worse / same than the previous version, per criterion, one line each. Flag any
-REGRESSION explicitly — regressions are the strongest signal in this report.
+REGRESSION explicitly — regressions are the strongest signal in this report. If the overall
+call is close, redo the comparison reading the versions in the OPPOSITE order (judges favor
+whichever they read in a privileged position); declare a winner only if the same version wins
+both orders, otherwise call it a tie and score accordingly.
 
 ## Verdict: SHIP or ITERATE
 SHIP if: every criterion ≥ {BAR, default 8} and no regression. Or: the loop budget is spent —

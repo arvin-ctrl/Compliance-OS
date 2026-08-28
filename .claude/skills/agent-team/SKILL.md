@@ -18,16 +18,23 @@ decides whether to ship or loop. Maker and checker are never the same context.
 
 The evidence for each design choice is collected in [references/research.md](references/research.md)
 — read it when you want to know *why* a rule below is a rule, or when adapting the process.
-The short version: iterative refinement with reliable feedback beats one-shot generation;
-critique needs external grounding (a rubric, tests, sibling comparisons) or it degrades into
-noise; diverse parallel attempts beat one attempt polished; returns diminish sharply after
-2-3 rounds, so loops must be bounded with explicit stop criteria.
+The short version, from the literature: **ungrounded self-critique makes work worse** (asking a
+model to "review your answer" with no external signal degraded GPT-4's GSM8K accuracy from
+95.5% to 89.0% over two rounds — Huang et al., ICLR 2024), while **grounded critique reliably
+helps** (tool-verified critique gained ~+7 points where self-talk lost points — CRITIC, ICLR
+2024). Models fix errors attributed to someone else that they cannot see in their own output
+(a measured 64.5% "self-correction blind spot" — hence fresh-context critics). Gains saturate
+by rounds 2-4 and extra review rounds then *add* false positives (hence the bounded loop and
+one thorough critique pass per version). Diverse perspectives help only above a quality floor
+and only when initial drafts are independent (hence roles, and no peeking before round 1).
 
 ## Cost honesty (read before committing)
 
-This process spends roughly 10-20× the tokens of a direct answer and takes meaningfully longer.
-That trade is right for work the user will actually use — a product, a document that matters, a
-plan they'll execute. It is wrong for anything you could answer well in one pass. When the
+This process spends multiples of a direct answer's tokens — Anthropic measured multi-agent
+systems at ~15× chat-level token use, and that spend is also *why* they win (token budget
+explained 80% of performance variance in their research system). The trade is right for work
+the user will actually use — a product, a document that matters, a plan they'll execute. It is
+wrong for anything you could answer well in one pass. When the
 request is genuinely small, say you're answering directly and why. When in doubt for mid-sized
 work, run the **small configuration** (see Scaling, below) rather than skipping the loop.
 
@@ -83,6 +90,11 @@ second block is the team talking to each other — it's how a good idea born in 
 section reaches the hero section. Drafts are written to `round-1/draft-<slug>.md`; agents
 return only summaries, keeping your context small.
 
+First drafts are independent by design: drafters see the brief and research, never each
+other's in-progress work. Cross-pollination happens *after* drafts exist (critique and
+revision phases). This ordering matters — models exposed to peer answers before forming their
+own conform to them, which destroys the diversity the loop feeds on.
+
 ## Phase 2 — Critique (parallel, fresh eyes)
 
 When all drafts land, spawn critics — **fresh agents, never the drafter re-reading its own
@@ -98,7 +110,11 @@ substitution ("did the team quietly solve an easier problem?"), audience walk-th
 worst day, correctness verification, required gaps, safety/compliance exposure.
 
 Critics do not rewrite, do not invent requirements, and are told a strong section deserves a
-short critique — manufactured complaints churn the loop without improving anything.
+short critique — reviewers pressed to keep finding problems start fabricating them (measured:
+extra review rounds trade a little recall for ~60% more false positives). For the same reason,
+critique is **one thorough pass per version**: critics don't dialogue with each other, don't
+re-review after revision (the next round's fresh critics do that), and always critique the
+artifact on disk — never the conversation about it.
 
 ## Phase 3 — Revise (parallel)
 
@@ -120,7 +136,10 @@ means one strong voice, not the average of five voices.
 
 A fresh judge scores Version N against the rubric only — 1-10 per criterion with quoted
 evidence. From round 2 on, the judge scores the new version FIRST, then compares to the
-previous one per criterion, flagging regressions explicitly.
+previous one per criterion, flagging regressions explicitly. Judges have measured biases —
+they favor the position read first and confident-sounding prose — so the templates pin them to
+the rubric, and on a close call between versions the judge re-runs the comparison with the
+versions in swapped order and calls it a tie unless one wins both ways.
 
 - **SHIP** when every criterion ≥ bar and nothing regressed.
 - **ITERATE** otherwise, with 3-5 numbered directives, each naming a target section and the
@@ -170,10 +189,13 @@ write each artifact to its file, then *start each role by re-reading only that r
 from disk* — the file boundary is what preserves fresh eyes when you can't have fresh
 contexts. Do the phases in the same order; never critique from memory of writing the draft.
 
-**Code-project specifics.** Sections = modules/features on disjoint files (use worktrees only
-when overlap is unavoidable). Critics run the code and tests — a critique of unexecuted code
-is an opinion. Judge gates on "tests pass" and "runs end-to-end". The integrator gets the
-whole thing building before the judge sees it.
+**Code-project specifics.** The governing principle is *parallelize reads, serialize writes*:
+research, review, and critique fan out freely, but implementation is partitioned by strict
+file ownership — sections = modules/features on disjoint files (worktrees only when overlap
+is unavoidable), and one integrator owns the merge. Parallel writers who can't see each other
+make conflicting implicit decisions; ownership boundaries are what prevent that. Critics run
+the code and tests — a critique of unexecuted code is an opinion. Judge gates on "tests pass"
+and "runs end-to-end". The integrator gets the whole thing building before the judge sees it.
 
 ## Failure modes to watch (each of these has burned real runs)
 
